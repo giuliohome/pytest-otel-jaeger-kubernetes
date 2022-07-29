@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: jaeger-all-in-one
+  name: jaeger-all-in-one
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: jaeger-all-in-one
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/pytest_otel: "true"
+        io.kompose.service: jaeger-all-in-one
+    spec:
+      containers:
+        - image: jaegertracing/all-in-one:latest
+          name: jaeger-all-in-one
+          ports:
+            - containerPort: 16686
+            - containerPort: 14268
+            - containerPort: 14250
+          resources: {}
+      restartPolicy: Always
+status: {}
