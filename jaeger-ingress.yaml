@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/backends: '{"k8s1-be621fbf-default-jaeger-all-in-one-16686-734debea":"HEALTHY"}'
+    ingress.kubernetes.io/forwarding-rule: k8s2-fr-9ulfu0cz-default-jaeger-ingress-19h8i7xc
+    ingress.kubernetes.io/target-proxy: k8s2-tp-9ulfu0cz-default-jaeger-ingress-19h8i7xc
+    ingress.kubernetes.io/url-map: k8s2-um-9ulfu0cz-default-jaeger-ingress-19h8i7xc
+  creationTimestamp: "2022-07-30T06:54:14Z"
+  finalizers:
+  - networking.gke.io/ingress-finalizer-V2
+  generation: 1
+  managedFields:
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:defaultBackend:
+          .: {}
+          f:service:
+            .: {}
+            f:name: {}
+            f:port:
+              .: {}
+              f:number: {}
+    manager: GoogleCloudConsole
+    operation: Update
+    time: "2022-07-30T06:54:14Z"
+  - apiVersion: networking.k8s.io/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:ingress.kubernetes.io/backends: {}
+          f:ingress.kubernetes.io/forwarding-rule: {}
+          f:ingress.kubernetes.io/target-proxy: {}
+          f:ingress.kubernetes.io/url-map: {}
+        f:finalizers:
+          .: {}
+          v:"networking.gke.io/ingress-finalizer-V2": {}
+      f:status:
+        f:loadBalancer:
+          f:ingress: {}
+    manager: glbc
+    operation: Update
+    subresource: status
+    time: "2022-07-30T06:55:09Z"
+  name: jaeger-ingress
+  namespace: default
+  resourceVersion: "20208"
+  uid: e6776f51-9b8a-4dcb-afef-7ac2d22d4fd7
+spec:
+  defaultBackend:
+    service:
+      name: jaeger-all-in-one
+      port:
+        number: 16686
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.160.44.84
