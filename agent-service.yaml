@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: agentsrv
+  name: agentsrv
+spec:
+    ports:
+    - name: fw-traces-otlp
+      port: 24317
+      protocol: TCP
+      targetPort: 4317
+    - name: fw-traces-http
+      port: 24318
+      protocol: TCP
+      targetPort: 4318
+    - name: fw-traces-jaeger
+      port: 24319
+      protocol: TCP
+      targetPort: 4319
+    selector:
+      name: agent
+    externalTrafficPolicy: Local
+    type: LoadBalancer

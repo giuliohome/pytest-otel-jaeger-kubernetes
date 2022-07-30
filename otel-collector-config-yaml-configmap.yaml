@@ -5,9 +5,13 @@ data:
                   # SPDX-License-Identifier: Apache-2.0
                   # imported from https://github.com/mdelapenya/junit2otlp
                   receivers:
+                    jaeger:
+                      protocols:
+                        thrift_compact:
                     otlp:
                       protocols:
                         grpc:
+                        http:
 
                   exporters:
                     logging:
@@ -18,6 +22,10 @@ data:
                       endpoint: jaeger-all-in-one:14250
                       tls:
                         insecure: true
+                    otlp:
+                      endpoint: tempo-eu-west-0.grafana.net:443
+                      headers:
+                        authorization: Basic MyKey
 
                   processors:
                     batch:
@@ -35,7 +43,7 @@ data:
                       traces:
                         receivers: [otlp]
                         processors: [batch]
-                        exporters: [logging, jaeger]
+                        exporters: [logging, jaeger,otlp]
                       metrics:
                         receivers: [otlp]
                         processors: [batch]

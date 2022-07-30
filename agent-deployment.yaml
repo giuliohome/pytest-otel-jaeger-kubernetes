@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent
+spec:
+  minReadySeconds: 10
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      name: agent
+  template:
+    metadata:
+      labels:
+        name: agent
+    spec:
+      containers:
+        - args:
+          - "-config.file=/etc/agent/agent.yaml"
+          - "-disable-reporting=True"
+          command:
+          - /bin/agent
+          env:
+          - name: agent
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          image: grafana/agent:latest # v0.25.1
+          imagePullPolicy: IfNotPresent
+          name: agent
+          volumeMounts:
+            - mountPath: /etc/agent/agent.yaml
+              name: agent-claim0
+              subPath: agent.yaml
+          ports:
+          - containerPort: 4317
+            name: trace-otlp-grpc
+            protocol: TCP
+          - containerPort: 4318
+            name: trace-otlp-http
+            protocol: TCP
+      restartPolicy: Always
+      volumes:
+        - name: agent-claim0
+          configMap:
+            name: agent-yaml

@@ -19,10 +19,16 @@ spec:
     - name: "14317"
       port: 14317
       targetPort: 4317
+    - name: "14318"
+      port: 14318
+      targetPort: 4318
+    - name: "16831"
+      port: 16831
+      targetPort: 6831
     - name: "55670"
       port: 55670
       targetPort: 55679
   selector:
     io.kompose.service: otel-collector
-status:
-  loadBalancer: {}
+  externalTrafficPolicy: Local
+  type: LoadBalancer

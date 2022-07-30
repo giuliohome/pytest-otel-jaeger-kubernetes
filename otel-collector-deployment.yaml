@@ -41,6 +41,8 @@ spec:
             - containerPort: 1888
             - containerPort: 13133
             - containerPort: 4317
+            - containerPort: 4318
+            - containerPort: 6831
             - containerPort: 55679
           resources: {}
           volumeMounts:
