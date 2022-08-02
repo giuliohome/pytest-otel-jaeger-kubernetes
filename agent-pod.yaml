@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: agent
+spec:
+    containers:
+      - args:
+        - "-config.file=/etc/agent/agent.yaml"
+        - "-disable-reporting=True"
+        command:
+        - /bin/agent
+        env:
+        - name: agent
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        image: grafana/agent:main
+        imagePullPolicy: IfNotPresent
+        name: agent
+        resources:
+         requests:
+            cpu: 10m
+            memory: 64Mi
+         limits:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+          - mountPath: /etc/agent/agent.yaml
+            name: agent-claim0
+            subPath: agent.yaml
+        ports:
+        - containerPort: 4317
+          name: trace-otlp-grpc
+          protocol: TCP
+        - containerPort: 4318
+          name: trace-otlp-http
+          protocol: TCP
+    restartPolicy: Always
+    volumes:
+      - name: agent-claim0
+        configMap:
+          name: agent-yaml

@@ -25,7 +25,7 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
-          image: grafana/agent:latest # v0.25.1
+          image: grafana/agent:main 
           imagePullPolicy: IfNotPresent
           name: agent
           volumeMounts:
