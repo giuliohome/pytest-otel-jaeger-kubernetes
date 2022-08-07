@@ -1,0 +1,18 @@
+server:
+  # http_listen_port: 12345
+  log_level: debug
+traces:
+  configs:
+    - name: integrations
+      receivers:
+        otlp:
+          protocols:
+            grpc:
+              endpoint: 0.0.0.0:4317
+            http:
+              endpoint: 0.0.0.0:4318
+      remote_write:
+        - endpoint: tempo-eu-west-0.grafana.net:443
+          basic_auth:
+            username: <myuser>
+            password: <mykey>

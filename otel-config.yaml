@@ -1,0 +1,22 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+
+exporters:
+  logging:
+    loglevel: debug
+  otlp:
+   endpoint: tempo-eu-west-0.grafana.net:443
+   headers:
+     authorization: Basic <my-b64-token>
+
+# processors:
+#   batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      # processors: [batch]
+      exporters: [logging, otlp]
