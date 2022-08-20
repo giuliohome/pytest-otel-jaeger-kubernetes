@@ -14,5 +14,5 @@ traces:
       remote_write:
         - endpoint: tempo-eu-west-0.grafana.net:443
           basic_auth:
-            username: <myuser>
-            password: <mykey>
+            username: ${MYUSER}
+            password: ${MYKEY}
