@@ -9,7 +9,7 @@ exporters:
   otlp:
    endpoint: tempo-eu-west-0.grafana.net:443
    headers:
-     authorization: Basic <my-b64-token>
+     authorization: Basic  ${MYTOKEN}
 
 # processors:
 #   batch:
