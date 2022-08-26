@@ -36,7 +36,8 @@ ctx
 from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapPropagator
 prop = TraceContextTextMapPropagator()
 carrier = {}
-a.end()
-prop.inject(carrier=carrier,context=ctx)
+a.end() 
 carrier
 print(carrier['traceparent'])
+with open('traceparent.txt','w') as f:
+  f.write(carrier['traceparent'])
